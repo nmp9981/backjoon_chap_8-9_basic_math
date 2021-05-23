@@ -1,0 +1,9 @@
+#벌집 이동 거리
+n = int(input())
+
+#수열 계산(n=1,2일때 range범위때문에 오류발생 => 보정)
+for i in range(1,n+2):
+  ai = 3*i*i - 3*i +1
+  if ai >= n:
+    print(i)
+    break
