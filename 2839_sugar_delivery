@@ -1,0 +1,18 @@
+#설탕 배달
+n = int(input())
+sugar = [3,5]
+count = n//5#큰 봉투로만 넣었을 때
+n = n%5#넣고 남은것
+
+while n>0:
+  if n%3 == 0:
+    count += n//3
+    n = n%3
+  else:#큰 봉투 1개 반납, 5획득
+    n += 5
+    count -= 1
+    if count == -1:#1,2,4 처럼 반납할 봉투가 없을 경우
+      count = -1
+      break
+
+print(count)
