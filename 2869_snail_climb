@@ -1,0 +1,10 @@
+import math
+#달팽이 이동
+a,b,v = map(int,input().split())
+
+#하루에 올라가는 높이
+day = a-b
+
+#총 일수(day*x + a >= v)
+total = math.ceil((v-a)/day) + 1
+print(total)
