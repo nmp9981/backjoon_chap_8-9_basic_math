@@ -1,0 +1,23 @@
+#소수 찾기
+def prime(m,n):
+  li = []
+  div_max = round((n+1)**(0.5)) + 1
+  for i in range(m, n+1):
+    count = 0
+    for j in range(2, div_max):
+      if i % j == 0 and j < i:#나누어 떨어지면서 자신보다 나누는 수가 작아야함 
+        count += 1
+    #소수 판별
+    if count == 0 and i != 1:
+      li.append(i)
+  return li
+
+#입력
+m = int(input())
+n = int(input())
+prime_li = prime(m,n)
+if len(prime_li) == 0:#소수가 없을 경우
+  print(-1)
+else:
+  print(sum(prime_li))
+  print(min(prime_li))
