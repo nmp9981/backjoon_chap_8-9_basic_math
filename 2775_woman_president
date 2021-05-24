@@ -1,0 +1,32 @@
+#테스트 케이스 개수
+t = int(input())
+
+#2차원 리스트 생성
+def list_2(n,k):
+  li = []
+  for r in range(0, n+1):
+    li_2 = []
+    for c in range(0, k+1):
+      li_2.append(1)
+    li.append(li_2)
+  return li
+
+#사람 수 구하기
+def room(n,k):
+  for r in range(0, n+1):
+    for c in range(0, k+1):
+      if r == 0:
+        li[r][c] = c + 1
+      elif c == 0:
+        li[r][c] = 1
+      else:
+        li[r][c] = li[r-1][c] + li[r][c-1]
+  return li[n][k-1]
+
+#결과 출력
+for i in range(0, t):
+  n = int(input()) 
+  k = int(input()) 
+  li = list_2(n,k)
+  people = room(n,k)
+  print(people)
