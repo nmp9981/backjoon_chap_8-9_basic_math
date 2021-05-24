@@ -1,0 +1,17 @@
+#소인수분해
+def prime(n):
+  i = 2
+  while i <= n:
+    if n % i == 0:
+      n /= i
+      print(i)
+      i = 2
+    else:
+      i += 1
+    #종료
+    if n == 1:
+      break
+
+#수입력
+n = int(input())
+prime(n)
