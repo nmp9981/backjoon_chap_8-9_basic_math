@@ -1,0 +1,24 @@
+#몇번 이동해야 하는가?
+def count(dist):
+  a = 1#초기값
+  k = 0#횟수
+  #an = 1 + sum((k+3)//2)
+  while True:
+    k += 1
+    a += (k+3)//2
+    if dist < a:
+      return k
+      break
+
+#테스트 케이스
+t = int(input())
+
+#거리에 따른 횟수 출력
+for i in range(0, t):
+  x, y = map(int,input().split())#시작/종료거리
+  dist = y-x
+  if dist >= 3:
+    result = count(dist - 2) + 2#양끝은 항상 1
+  else:#거리가 2이하일 경우
+    result = dist
+  print(result)
