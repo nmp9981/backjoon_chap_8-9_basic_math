@@ -1,0 +1,16 @@
+#피타고라스 정리
+#c^2 = a^2 + b^2
+def pitag(a,b,c):
+  li = [a,b,c]
+  li = sorted(li)
+  if li[2]**2 == li[0]**2 + li[1]**2:
+    print("right")
+  else:
+    print("wrong")
+
+while True:
+  a,b,c = map(int, input().split())
+  if a+b+c == 0:
+    break
+  else:
+    pitag(a,b,c)
