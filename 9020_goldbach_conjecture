@@ -1,0 +1,44 @@
+#소수판정
+def prime(n2):
+  count = 0
+  tf = True#소수 판정 여부
+  max_div = round(n2**0.5 + 3)
+  for i in range(3, max_div, 2):
+    if n2 % i == 0 and n2 != i:#자기자신외에 나눠떨어지는 순간 소수가 아님
+      count = 1
+      tf = False
+      break
+  return tf
+
+#테스트 수 입력
+t = int(input())
+
+for k in range(0, t):
+  #입력
+  n = int(input())
+  n2 = n // 2
+
+  #한쪽은 더하고 한쪽은 빼면서 진행
+  if n == 4:#예외처리(2도 소수)
+    print(2,2)
+  elif n2 % 2 == 0:#홀수만 계산하므로 보정
+    n2 += 1
+    while True:
+      #각각 소수인지 판별
+      n2_tf1 = prime(n2)
+      n2_tf2 = prime(n - n2)
+      if n2_tf1 == True and n2_tf2 == True:#둘다 소수일 경우
+        print(n-n2, n2)
+        break
+      else:
+        n2 += 2#홀수만 계산
+  else:
+    while True:
+      #각각 소수인지 판별
+      n2_tf1 = prime(n2)
+      n2_tf2 = prime(n - n2)
+      if n2_tf1 == True and n2_tf2 == True:#둘다 소수일 경우
+        print(n-n2, n2)
+        break
+      else:
+        n2 += 2#홀수만 계산
