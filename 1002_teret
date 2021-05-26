@@ -1,0 +1,19 @@
+#teret
+t = int(input())
+
+#원의 교점 개수
+def circle(dist, r1, r2):
+  if dist == 0 and r1 == r2:#두원이 합동 => 교점 무한대
+    print("-1")
+  elif dist != 0 and (dist == r1 + r2 or dist == abs(r1 - r2)):#교점 1개
+    print("1")
+  elif (dist == 0 and r1 != r2) or (dist != 0 and dist > r1 + r2) or (dist != 0 and dist < abs(r2 - r1)):#교점 0개
+    print("0")
+  else:#나머지 교점 2
+    print("2")
+
+for i in range(0, t):
+  x1, y1, r1, x2, y2, r2 = map(int, input().split())
+  dist = ((x1 - x2)**2 + (y1 - y2)**2)**0.5
+
+  circle(dist, r1, r2)
