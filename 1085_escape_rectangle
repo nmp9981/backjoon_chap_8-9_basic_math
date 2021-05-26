@@ -1,0 +1,6 @@
+#직사각형에서 탈출
+x,y,w,h = map(int, input().split())
+
+#문제에서는 직사각형의 내부에 있는 경우만 고려
+dist = min(x,abs(w-x),y,abs(h-y))
+print(dist)
