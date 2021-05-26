@@ -1,0 +1,31 @@
+#소수 찾기
+def prime(m,n):
+  if m % 2 == 0:#홀수만 계산하기위해 보정
+    m += 1
+  
+  div_max = round(n**0.5 + 3)
+  i = m
+  while i < n+1:#홀수만 계산
+    count = 0#소수 판정 변수
+    for j in range(3, div_max, 2):
+      if i % j == 0 and i != j:#소수가 아님
+        count = 1
+        break
+
+    if count == 0:#소수일 경우
+      print(i)
+      i += 2
+    else:
+      i += 2
+
+#입력
+m, n = map(int,input().split())
+if n == 2:#예외처리(2는 소수)
+  print(2)
+elif n == 1:
+  print()
+elif m <= 2:
+  print(2)
+  prime(m+1, n)
+else:
+  prime(m, n)
