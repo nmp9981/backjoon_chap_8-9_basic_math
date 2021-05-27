@@ -1,0 +1,22 @@
+#에라토스네의 체
+def prime(n, k):
+  li = [True]*(n+1)
+  count = 0
+  i = 2#2의 배수부터
+  #i의 배수 지우기
+  tf = True
+  while tf:
+    for j in range(i, n+1, i):
+      if li[j] == True:
+        li[j] = False
+        count += 1
+      if count == k:#종료준비
+        print(j)
+        tf = False#종료 조건을 우선 충족
+        count += 1#for문이 아직 끝나지 않았으므로 중복방지를 위해 count를 계속 더해줌
+    i += 1
+
+#소수의 개수
+n, k = map(int, input().split())
+if n != 1:
+  prime(n, k)
