@@ -1,0 +1,42 @@
+#짝 곱
+#에라토스테네스의 체
+def era(k):
+  li = [True]*(k+1)
+  sq_li = round(len(li)**0.5 + 2)
+  for i in range(3,sq_li,2):
+    if li[i] == True:#i의 배수
+      for j in range(i**2, len(li), i):
+        if li[j] == True:
+          li[j] = False
+  
+  prime = [2,3,5,7]
+  for i in range(11,len(li),2):
+    if li[i] == True:
+      prime.append(i)
+  
+  return prime
+
+#짝 곱 구하기
+def mul(n,prime):
+  num = n
+  while num < n + 3000:
+    for x in range(0,round(n/5)):
+      #소수로 나누었을때 소수여야하며 두 수는 서로 다른 숫자여야한다.
+      if (num / prime[x]) in prime and num != prime[x]**2:
+        print(num)
+        return#함수를 즉시 빠져나감
+      elif prime[x] > round(num**0.5+3):
+        break#for문만 빠져나감
+    num += 1
+ 
+
+#입력
+t = int(input())
+prime = era(99997)#소수는 9592개
+for i in range(0,t):
+  n = int(input())
+  if n<=6:
+    print(6)
+  else:
+    mul(n, prime)
+      
