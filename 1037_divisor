@@ -1,0 +1,13 @@
+#약수
+n = int(input())
+div = list(map(int, input().split()))#진약수
+div = sorted(div)#약수를 오름차순으로 정렬
+mid_div = len(div) // 2
+
+#원래수 구하기
+if len(div) % 2 == 1:#제곱수
+  result = div[mid_div] ** 2
+  print(result)
+else:#제곱수가 아닐경우
+  result = div[mid_div] * div[mid_div - 1]
+  print(result)
