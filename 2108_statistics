@@ -1,0 +1,56 @@
+import sys
+from collections import Counter
+
+#최빈값구하기(모듈o)
+def mode(num):
+  mode_dict = Counter(num)
+  modes = mode_dict.most_common()
+
+  if len(num) > 1:
+    if modes[0][1] == modes[1][1]:
+      mod = modes[1][0]
+    else:
+      mod = modes[0][0]
+  else:
+    mod = modes[0][0]
+
+  return mod
+'''
+#최빈값구하기(모듈x, 실패)
+def mod(num,lon):
+  count = 1
+  mod_nums = []
+  set_num = set(num)
+  for i in set_num:
+    if count < num.count(i):
+      count = num.count(i)
+      mod_nums = [i]#최빈수가 바뀔경우 최빈값리스트 초기화
+    elif count == num.count(i):#최빈값이 여러개일 경우
+      mod_nums.append(i)
+  
+  if len(mod_nums) >= 2:#최빈값이 2개 이상
+    mod_nums = sorted(mod_nums)
+    return mod_nums[1]
+  else:#최빈값이 1개
+    return mod_nums[0]
+'''
+#통계학
+def stat(num):
+  lon = len(num)
+  av = round(sum(num)/lon)#평균
+  ran = num[lon - 1] - num[0]#범위
+  mid = num[lon//2]#중앙값
+  mod_num = mod(num,lon)
+  print(av)
+  print(mid)
+  print(mod_num)
+  print(ran)
+
+#입력
+t = int(sys.stdin.readline())
+num = []
+for _ in range(t):
+  num.append(int(sys.stdin.readline()))
+
+num.sort()
+stat(num)
