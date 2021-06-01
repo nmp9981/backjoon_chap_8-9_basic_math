@@ -1,0 +1,29 @@
+import math
+#두 원의 면적
+def circle(r1,r2,dist):
+  pi = math.pi
+  #코사인 법칙 II
+  cos1 = (r1**2 + dist**2 - r2**2) / (2*r1*dist)
+  cos2 = (r2**2 + dist**2 - r1**2) / (2*r2*dist)
+
+  theta1 = math.degrees(math.acos(cos1))
+  theta2 = math.degrees(math.acos(cos2))
+  
+  #부채꼴 - 삼각형 (이때 사인은 라디안으로 계산)
+  s2 = (r1**2)*pi*theta1/180 - 0.5*(r1**2)*math.sin(math.radians(2*theta1))
+  s1 = (r2**2)*pi*theta2/180 - 0.5*(r2**2)*math.sin(math.radians(2*theta2))
+  s = s1 + s2
+  print("{:.3f}".format(s))
+
+x1,y1,r1,x2,y2,r2 = map(float,input().split())
+dist = ((x2-x1)**2+(y2-y1)**2)**0.5
+if r1 + r2 > dist and abs(r1- r2) < dist:#겹침
+  circle(r1,r2,dist)
+elif abs(r1- r2) >= dist:#한 원이 다른 원의 내부로 들어감
+  pi = math.pi
+  s1 = r1**2*pi
+  s2 = r2**2*pi
+  s = min(s1,s2)
+  print("{:.3f}".format(s))
+else:#안 
+  print('0.000')
