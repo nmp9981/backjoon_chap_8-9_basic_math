@@ -1,0 +1,36 @@
+def era(n):
+  #에라토스테네스 체
+  if n >= 100000:#소수 인정 범위
+    n = 99999
+
+  prim_li = [True]*(n+1)
+  sq_li = round(n**0.5 + 3)
+  for i in range(3,sq_li,2):#홀수만 계산
+    if prim_li[i] == True:
+      for j in range(i**2,n+1,i):#i^2이후만 지움
+        prim_li[j] = False
+
+  #소수 리스트 출력
+  prime = ['2']
+  for i in range(3,n+1,2):
+    if prim_li[i] == True:
+      prime.append(str(i))
+
+  return prime
+
+#가장 큰 소수 부분 문자열 출력
+def prim_str(prime,n):
+  l = len(prime)
+  for i in range(l-1, -1, -1):#가장 큰 소수 이므로 큰 소수부터 조사
+    if prime[i] in str(n) and prime[i] != str(n):#부분 문자열이므로 자기자신 제외, 문자열 내 해당 소수가 있는가?
+      print(prime[i])
+      break
+
+#입력
+while True:
+  n = int(input())
+  if n == 0:
+    break
+  else:
+    prime = era(n)
+    prim_str(prime, n)
