@@ -1,0 +1,22 @@
+import math
+def ring(n,li):
+  for i in range(1,n):
+    length = li[0]#첫번째링이 한바퀴 회전한 거리
+    div = min(li[i], length)#링의 원주 / 나머지 원의 원주
+
+    #몇바퀴 회전 했는가?
+    j = 2
+    while j < div+1:
+      #기약분수로 표현해야하므로 분자분모를 모두 나눠줌
+      if li[i] % j == 0 and length % j == 0:
+        length /= j
+        li[i] /= j
+      else:
+        j += 1
+    print(str(int(length))+"/"+str(int(li[i])))#형변환
+    
+
+#입력
+n = int(input())
+li = list(map(int, input().split()))
+ring(n,li)
