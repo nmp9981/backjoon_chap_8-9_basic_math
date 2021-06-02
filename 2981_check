@@ -1,0 +1,47 @@
+#이웃항과의 차
+#나머지가 모두 같으려면 각 차이의 최소값을 구해야한다
+def nei(n):
+  neibor = []
+  for i in range(0,len(n)-1):
+    sub = n[i+1] - n[i]
+    neibor.append(sub)
+  
+  return neibor
+
+#number의 약수
+def rest(number):
+  rest_n = []
+  sq = round(number ** 0.5 + 1)#제곱근까지만
+  for i in range(2,sq):
+    if number % i == 0:
+      if i**2 != number:
+        rest_n.append(i)
+        rest_n.append(int(number/i))
+      elif i**2 == number:#제곱수일 경우
+        rest_n.append(i)
+  rest_n.append(number)#자기자신 추가
+  return rest_n
+
+#입력
+t = int(input())
+n = []
+for i in range(0,t):
+  num = int(input())
+  n.append(num)
+
+n.sort()#오름차순 정렬
+neibor = nei(n)#이웃항간 차
+
+#여러개의 최대공약수
+set_number = set(rest(neibor[0]))#집합으로 변환
+for i in range(0,len(neibor)):#각각의 약수리스트를 구해서 이들의 최종 교집합을 구함 
+  set_number = set_number.intersection(set(rest(neibor[i])))#재귀적으로 교집합 갱신
+
+number = max(set_number)#교집합의 원소(공약수)들 중 최대값이 최대 공약수
+rest_n = rest(number)#최대공약수의 약수
+
+#출력
+rest_n.sort()
+for i in range(0,len(rest_n)):
+  print(rest_n[i],end=" ")#공백으로 구분하여 출력
+  
