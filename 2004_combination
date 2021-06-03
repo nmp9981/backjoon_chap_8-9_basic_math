@@ -1,0 +1,31 @@
+#조합
+#2^m
+def comb2(m):
+  count2 = 0
+  i = 1
+  while 2**i <= m:
+    count2 += m//(2**i)
+    i += 1
+  return count2
+
+#5^m
+def comb5(m):
+  count5 = 0
+  i = 1
+  while 5**i <= m:
+    count5 += m//(5**i)
+    i += 1
+  return count5
+
+#입력
+n,m = map(int, input().split())
+
+#10^n = 2^n * 5^n
+count_up2 = comb2(n)
+count_up5 = comb5(n)
+count_down2 = comb2(m)
+count_down5 = comb5(m)
+count_downr2 = comb2(n-m)
+count_downr5 = comb5(n-m)
+count0 = min(count_up2 - count_down2-count_downr2, count_up5 - count_down5- count_downr5)
+print(count0)
