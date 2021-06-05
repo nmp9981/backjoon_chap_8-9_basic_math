@@ -1,0 +1,19 @@
+#factorial
+def fact(x):
+  fac = 1
+  for i in range(2,x+1):
+    fac *= i
+  return fac
+#nCk
+def nck(n,m):
+  n_fac = fact(n)
+  m_fac = fact(m)
+  mn_fac = fact(m-n)
+  answer = round(m_fac / (mn_fac * n_fac))
+  print(answer)
+
+#입력
+t = int(input())
+for i in range(0,t):
+  n,m = map(int,input().split())
+  nck(n,m)
