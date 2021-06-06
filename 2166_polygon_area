@@ -1,0 +1,24 @@
+#면적
+def area(ploy):
+  #기준점
+  x0 = ploy[0][0]
+  y0 = ploy[0][1]
+  ploy.append([x0,y0])
+  surface = 0
+  #n-2개의 삼각형
+  for i in range(0,len(ploy)-1):
+    #다각형의 넓이
+    a = ploy[i][0] * ploy[i+1][1]
+    b = ploy[i+1][0] * ploy[i][1]
+    sq = a - b
+    surface += sq#넓이의 합
+  surface = round(abs(surface/2),1)
+  print(surface)
+
+#입력
+t = int(input())
+ploy = []
+for i in range(0,t):
+  x,y = map(int,input().split())
+  ploy.append([x,y])
+area(ploy)
