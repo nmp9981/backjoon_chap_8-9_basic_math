@@ -1,0 +1,17 @@
+#이항계수
+def fact(x):
+  result = 1
+  if x <= 1:
+    return result
+  else:
+    for i in range(2,x+1):
+      result *= i
+    return result
+    
+#입력(nck)
+n,k = map(int,input().split())
+facn = fact(n)
+fack = fact(k)
+facnk = fact(n-k)
+ans = round(facn / (fack*facnk))
+print(ans)
