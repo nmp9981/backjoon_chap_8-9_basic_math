@@ -1,0 +1,18 @@
+#GCD
+def gcd(a,b):
+  div = 2
+  g = 1
+  x = max(a,b)#큰수
+  y = min(a,b)#작은수
+  
+  #유클리드 호제법 이용
+  while y != 0: #작은수가 0이 될때까지
+    r = x % y #나머지 구함
+    x = y #작은수 => 큰수
+    y = r #나머지 => 작은수
+  return x
+  
+#입력
+a,b = map(int,input().split())
+g = gcd(a,b)#a,b의 최대공약수를 구하고 그만큼 1을 출력
+print('1'*g)
