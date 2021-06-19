@@ -1,0 +1,20 @@
+#-2진수
+import math
+def minus2(n):
+  p = []
+  #-2로 나누고 나머지 저장
+  while n != 1:
+    rest = n % 2
+    n = math.ceil(n/(-2))
+    p.append(rest)
+  p.append(1)#가장 앞자리수
+  #출력
+  p = p[::-1]#리스트 역순배열
+  for i in p:
+    print(i,end='')
+#입력
+n = int(input())
+if n == 0:
+  print(0)
+else:
+  minus2(n)
