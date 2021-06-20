@@ -1,0 +1,54 @@
+#2로 몇번 나눠 떨어지는가?
+#홀수
+def odd(a,b):
+  if a % 2 == 0  and b % 2 == 0:
+    odd_num = (b-a)//2
+  else:
+    odd_num = (b-a)//2 + 1
+  return odd_num
+
+#짝수
+def even(x,li):
+  p = [] #누적
+  s = [1] #개별
+
+  #리스트의 길이 지정
+  for i in range(1,51):
+    if x < li[i]:
+      l = i - 1
+      break
+
+  two = [2**i for i in range(l,0,-1)] #2^n, 역순으로
+  
+  #x/2^n
+  for i in range(l,0,-1):
+    div = x // li[i]
+    p.append(div)
+  
+  #개별리스트 작성
+  for i in range(1,l):
+    diff = p[i] - p[i-1]
+    s.append(diff)
+  
+  #결과
+  sum = 0
+  for i in range(l):
+    sum += two[i] * s[i]
+  return sum
+
+#입력
+a,b = map(int, input().split())
+li = [2**i for i in range(51)]#적당한 범위 지정
+
+#각각 결과
+odd_num = odd(a,b)
+if b % 2 == 1:
+  b -= 1
+even_num1 = even(b,li)
+if a % 2 == 1:
+  a -= 1
+else:
+  a -= 2
+even_num2 = even(a,li)
+#출력
+print(odd_num + even_num1 - even_num2)
