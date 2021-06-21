@@ -1,0 +1,27 @@
+import sys
+#오르막 수
+def bach(n, p):
+  i = 0
+  for i in range(3,n,2):
+    if p[i] == True and p[n-i] == True:
+      print(n,'=',i,'+',n-i)
+      return
+  
+  print('Goldbach\'s conjecture is wrong.')
+  
+#소수리스트(에라토스테네스의체 활용)
+p = [True]*1000001
+for i in range(3,1001,2):#홀수만 계산, 1000000**0.5 = 1000
+  if p[i] == True:
+    for j in range(i**2,1000001,i):#i^2부터 i의 배수
+      if p[j] == True:
+        p[j] = False
+
+#입력
+while True:
+  n = int(input())
+  #n = int(sys.stdin.readline())
+  if n == 0:
+    break
+  else:
+    bach(n, p)
