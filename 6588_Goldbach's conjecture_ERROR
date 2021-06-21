@@ -1,0 +1,36 @@
+import sys
+#Goldbach's conjecture
+def bach(n, prime):
+  i = 0
+  while True:
+    if n - prime[i] in prime:
+      a = prime[i] 
+      b = n - prime[i]
+      print(n,'=',a,'+',b)
+      return
+    elif prime[i] > n//2 + 1:
+      print('Goldbach\'s conjecture is wrong.')
+      return
+    else:
+      i += 1 
+
+#소수리스트(에라토스테네스의체 활용)
+p = [True]*1000001
+for i in range(3,1001,2):#홀수만 계산, 1000000**0.5 = 1000
+  if p[i] == True:
+    for j in range(i**2,1000001,i):#i^2부터 i의 배수
+      if p[j] == True:
+        p[j] = False
+prime = []
+for i in range(3,len(p),2):
+  if p[i] == True:
+    prime.append(i)
+
+#입력
+while True:
+  n = int(input())
+  #n = int(sys.stdin.readline())
+  if n == 0:
+    break
+  else:
+    bach(n, prime)
