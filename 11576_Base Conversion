@@ -1,0 +1,26 @@
+#진법 변환
+def change(a,b,li,m):
+  #10진수로 변환
+  li_a = [a**i for i in range(m)]
+  li_a = li_a[::-1]
+  sum_10 = 0
+  for i in range(m):
+    sum_10 += li_a[i] * li[i]
+    
+  #b진수로 변환
+  li_b = []
+  while sum_10 > 0:
+    rest = sum_10 % b
+    li_b.append(rest)
+    sum_10 = sum_10 // b
+  
+  #출력
+  li_b = li_b[::-1]
+  for i in li_b:
+    print(i, end=" ")
+
+#입력
+a,b = map(int,input().split())
+m = int(input())
+li = list(map(int, input().split()))
+change(a,b,li,m)
