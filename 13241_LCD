@@ -1,0 +1,17 @@
+#입력
+a,b = map(int, input().split())
+x = max(a,b)
+y = min(a,b)
+
+#유클리드 호제법
+def gcd(x,y):
+	while y != 0:
+		r = x % y
+		x = y
+		y = r
+	return x
+
+g = gcd(x,y)
+#lcs = g*a*b
+lcd = round(a*b/g)
+print(lcd)
