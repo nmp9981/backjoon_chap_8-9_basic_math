@@ -1,0 +1,24 @@
+#입력
+c1,c2,c3,c4,c5,c6 = map(int, input().split())
+
+#GCD
+def gcd(x,y):
+  a = max(x,y)
+  b = min(x,y)
+  while b != 0:
+    r = a % b
+    a = b
+    b = r
+  return a
+
+#해찾기
+x2 = gcd(c1,c5)
+x6 = gcd(c3,c6)
+x1 = round(c1/x2)
+x3 = round(c5/x2)
+x5 = round(c6/x6)
+x7 = round(c3/x6)
+
+#출력
+for i in (x1,x2,x3,x5,x6,x7):
+  print(i, end=" ")
