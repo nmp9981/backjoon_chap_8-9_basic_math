@@ -1,0 +1,24 @@
+#입력
+g,l = map(int, input().split())
+n = round(l/g)
+
+#gcd
+def gcd(x,y):
+  a = max(x,y)
+  b = min(x,y)
+  while b != 0:
+    r = a % b
+    a = b
+    b = r
+  return a
+
+#두수 구하기
+n2 = round(n**0.5)
+for i in range(n2,0,-1):
+  m = n/i
+  if m % 1 == 0 and gcd(m,i) == 1:#n/i가 자연수이고 i,n/i가 서로소
+    #원래 수 
+    A = round(i*g)
+    B = round(m*g)
+    print(A,B)
+    break
