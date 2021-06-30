@@ -1,0 +1,22 @@
+#GCD
+def gcd(a,b):
+  x = max(a,b)
+  y = min(a,b)
+  while y != 0:
+    r = x % y
+    x = y
+    y = r
+  return x
+
+t = int(input())
+for i in range(t):
+  g = 1
+  p = list(map(int, input().split()))
+  l = len(p)
+  #모든 두 수의 쌍
+  for j in range(l-1):
+    for k in range(j+1,l):
+      if g < gcd(p[j],p[k]):
+        g = gcd(p[j],p[k])
+  #가장 큰 최대공약수
+  print(g)
