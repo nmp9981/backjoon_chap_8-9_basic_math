@@ -1,0 +1,20 @@
+#GCD
+def gcd(x,y):
+  a = max(x,y)
+  b = min(x,y)
+  while b != 0:
+    r = a % b
+    a = b
+    b = r
+  return a
+
+#입력
+x,y = map(int, input().split())
+
+#답
+g = gcd(x,y)
+#단위개수
+xg = x/g
+yg = y/g
+result = round((xg+yg-1)*g)
+print(result)
