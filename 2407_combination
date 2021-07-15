@@ -1,0 +1,14 @@
+#입력
+n,m = map(int,input().split())
+
+#조합
+p = [[0]*101 for i in range(101)]
+p[1][0] = 1
+p[1][1] = 1
+#점화식
+for i in range(2,n+1):
+  for j in range(0,i+1):
+    p[i][j] = p[i-1][j] + p[i-1][j-1]
+
+#출력
+print(p[n][m])
