@@ -1,0 +1,27 @@
+#행렬곱
+def mat(a,b):
+  matrix = [[0,0],[0,0]]
+  for i in range(2):
+    for j in range(2):
+      m = 0
+      for k in range(2):
+        m += a[i][k]*b[k][j]
+      matrix[i][j] = m % 1000000
+  return matrix
+
+#분할
+def power(p,n):
+  if n == 1:
+    return p
+  if n % 2 == 0:
+    pibo = power(p,n//2)
+    return mat(pibo,pibo)
+  else:
+    pibo = power(p,(n-1)//2)
+    return mat(mat(pibo,pibo),p)
+
+#입력
+n = int(input())
+p = [[1,1],[1,0]]
+result = power(p,n)
+print(result[1][0])
