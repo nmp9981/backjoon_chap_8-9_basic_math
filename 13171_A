@@ -1,0 +1,17 @@
+#분할
+def power(r,n):
+  if n == 1:
+    return r
+  if n%2 == 0:
+    k = power(r,n//2)
+    return (k*k)%mod
+  else:
+    k = power(r,(n-1)//2)
+    return (k*k*r)%mod
+
+#입력
+r = int(input())
+n = int(input())
+mod = 10**9+7
+rn = power(r,n) 
+print(rn)13171
