@@ -1,0 +1,30 @@
+import math
+#소수 리스트
+prime = [True]*1001001
+for i in range(3,1010,2):
+  if prime[i] == True:
+    for j in range(i**2,1001001,i):
+      prime[j] = False
+
+p = [2]
+for i in range(3,1001001,2):
+  if prime[i] == True:
+    p.append(i)
+
+#소수 제곱 리스트
+p2 = [p[i]**2 for i in range(len(p))]
+
+#입력
+mini,maxi = map(int,input().split())
+m = [1]*(maxi-mini+1) #공간절약을 위해 min~max만
+len_m = len(m)
+
+#제곱 ㄴㄴ 수
+for i in p2:
+  #지워야하는 최소의 수
+  min_num = math.ceil(mini/i)*i
+  for j in range(min_num-mini,len_m,i):
+    m[j] = 0
+  
+#출력
+print(sum(m))
