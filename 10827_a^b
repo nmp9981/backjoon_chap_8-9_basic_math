@@ -1,0 +1,7 @@
+from decimal import Decimal, getcontext
+#입력
+a,b = input().split()
+
+#최대 99.999999999 => 11자리*99 = 1100자릿수
+getcontext().prec = 1101 #충분한 정확도 설정
+print("{0:f}".format(Decimal(a)**int(b)))
