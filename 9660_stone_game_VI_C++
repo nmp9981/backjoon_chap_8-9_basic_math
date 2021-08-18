@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+
+using namespace std;//이름공간 선언
+
+int main() {
+  
+  //입력
+  long long n;
+  cin>>n;
+  string stone[7] = {"SK","SK","SK","SK","CY","SK","CY"};
+
+  //점화식
+  if(n==1){
+    cout<<"SK"<<endl;
+  }else if(n==2){
+    cout<<"CY"<<endl;
+  }else{
+    cout<<stone[(n-3)%7]<<endl;
+  }
+
+  return 0;
+}
