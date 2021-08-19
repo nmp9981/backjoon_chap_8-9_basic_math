@@ -1,0 +1,32 @@
+import sys
+#입력
+s = input()
+s = list(s)
+#출력
+#상수
+if 'x' not in s:
+  print(0)
+  sys.exit(0)
+
+#첫항의 부호
+if s[0] == 'x':
+  print(1)
+elif s[0] != '-' :
+  result = int(s[0])
+  for i in range(1,len(s)):
+    if s[i] == 'x':
+      print(result)
+      break
+    result *= 10
+    result += int(s[i])
+else:
+  if s[1] == 'x':
+    print(-1)
+  else:
+    result = int(s[1])
+    for i in range(2,len(s)):
+      if s[i] == 'x':
+        print(-result)
+        break
+      result *= 10
+      result += int(s[i])
