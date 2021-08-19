@@ -1,0 +1,20 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+
+using namespace std;//이름공간 선언
+
+int main() {
+  
+  //입력
+  long long n;//자료형 주의
+  cin>>n;
+  
+  //돌게임
+  string p[5] = {"SK","CY","SK","SK","CY"};
+
+  cout<<p[(n-1)%5]<<endl;
+  return 0;
+}
