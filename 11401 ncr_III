@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+
+using namespace std;//이름공간 선언
+using namespace chrono;
+
+long long mod = 1000000007;
+long long power(long long a,long long b){
+  if(b == 0){
+    return 1;
+  }
+  
+  long long temp = power(a,b/2)%mod;
+  if(b % 2==0){
+    return (temp*temp)% mod;
+  }else{
+    return ((temp*temp)%mod)*a % mod;
+  }
+}
+
+int main() {
+  cin.tie(0); //실행속도 향상
+  //입력
+  int n,k;
+  cin>>n>>k;
+  long long mod = 1000000007;
+  
+  //n!
+  long long n_fact = 1;
+  for(int i=1;i<=n;i++){
+    n_fact = (n_fact*i) % mod;
+  }
+  
+  //k!
+  long long k_fact = 1;
+  for(int i=1;i<=k;i++){
+    k_fact = (k_fact*i) % mod;
+  }
+  
+  //(n-k)!
+  long long nk_fact = 1;
+  for(int i=1;i<=(n-k);i++){
+    nk_fact = (nk_fact*i) % mod;
+  }
+  
+  //거듭제곱
+  long long x,y,result,p_y;
+  x = n_fact;
+  y = (k_fact * nk_fact) % mod;
+  p_y = power(y,mod-2) % mod;
+  
+  //페르마의 소정리
+  result = ((x%mod)*p_y)%mod;
+  cout<<result<<endl;
+  return 0;
+}
