@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+#include <queue>
+
+using namespace std;//이름공간 선언
+using namespace chrono;
+
+long long comb[2000][2000];
+void combination(long long m){
+  //초기화
+  for(int i=0;i<2000;i++){
+    for(int j=0;j<2000;j++){
+      comb[i][j] = 0;
+    }
+  }
+
+  //조합구하기
+  comb[0][0] = 1;//둘다 마지막이 0으로 끝날경우의 예외처리
+  comb[1][0] = 1;
+  comb[1][1] = 1;
+  for(int i=2;i<2000;i++){
+    for(int j=0;j<=i;j++){
+      if(j==0 || j==i){
+        comb[i][j] = 1;
+      }else{
+        comb[i][j] = (comb[i-1][j-1]+comb[i-1][j])%m;
+      }
+    }
+  }
+}
+
+int main() {
+  //입력
+  long long n,k,m;
+  cin>>n>>k>>m;
+
+  //미리 조합값 구해놓기
+  combination(m);
+
+  //소수진법
+  deque<long long> up;
+  deque<long long> down;
+  while(n>0){
+    up.push_back(n%m);
+    n /= m;
+  }
+
+  while(k>0){
+    down.push_back(k%m);
+    k /= m;
+  }
+  //길이가 다른경우 n을 나타낸것과 k를 나타낸것과 서로 길이를 맞춰야함
+  if(up.size()!=down.size()){
+    //사이즈가 더 작은 down에 0 추가
+    //0 = 0*k^n
+    while(down.size() != up.size()){
+      down.push_back(0);
+    }
+  }
+  
+  //조합 곱,뤼카의 정리
+  long long result = 1;
+  for(int i=0;i<up.size();i++){
+    long long ncm = 0;
+    ncm = comb[up[i]][down[i]] % m;
+    result = (result * ncm)%m;
+  }
+
+  //결과
+  cout<<result % m<<endl;
+}
