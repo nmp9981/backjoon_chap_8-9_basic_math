@@ -1,0 +1,36 @@
+#include <iostream>
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <utility>
+
+using namespace std;//이름공간 선언
+using namespace chrono;
+long long n;//5자리*5자리면 int초과
+long long num = 1;//마지막 자릿수
+
+int main(){
+    cin.tie(0);
+    cout.tie(0);
+
+    //입력
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        num*=i;
+        //num이 10의 배수(0을 다 날림)
+        while(num%10==0){
+            num/=10;
+        }
+        num%=1000000;//9*20000은 6자리
+        //고로 다음수를 위해 6자리가 필요하다고 판단
+    }
+    //출력
+    cout<<num%10;//일의 자리수
+}
