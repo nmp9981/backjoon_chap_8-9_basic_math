@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <utility>
+
+using namespace std;//이름공간 선언
+int n;
+int a[1001];//수열
+int dp[1001][1001];//i~j까지의 부분합
+int maxi;//결과
+
+//입력
+void input(){
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        dp[i][i] = a[i];//초기화
+        maxi = max(a[i],maxi);
+    }
+}
+
+//부분합 구하기
+void sub_sum(){
+    for(int i=1;i<=n;i++){
+        for(int j=i+1;j<=n;j++){
+            dp[i][j] = dp[i][j-1]+a[j];
+            maxi = max(dp[i][j],maxi);
+        }
+    }
+    cout<<maxi<<"\n";
+}
+
+int main(){
+    cin.tie(0);
+    cout.tie(0);
+    
+    int test;
+    cin>>test;
+    for(int t=0;t<test;t++){
+        maxi = -99999999;//결과가 음수일수도 있음
+        input();//입력
+        sub_sum();//부분합
+    }
+    return 0;
+}
