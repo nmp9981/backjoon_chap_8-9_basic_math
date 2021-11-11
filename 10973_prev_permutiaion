@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <utility>
+
+using namespace std;//이름공간 선언
+int n;
+vector<int> a;
+
+//입력
+void input(){
+    cin>>n;
+    for(int i=0;i<n;i++){
+        int x;
+        cin>>x;
+        a.push_back(x);
+    }
+}
+
+//조합구하기
+void combination(){
+    //이전조합이 있으면 출력
+    if(prev_permutation(a.begin(),a.end())){
+        //출력
+        for(int i=0;i<n;i++){
+            cout<<a[i]<<" ";
+        }
+    }else{
+        cout<<-1;
+    }
+}
+int main(){
+    cin.tie(0);
+    cout.tie(0);
+
+    input();//입력
+    combination();//조합구하기
+    return 0;
+}
