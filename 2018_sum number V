@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <utility>
+
+using namespace std;//이름공간 선언
+int n;
+
+int main(){
+    cin.tie(0);
+    cout.tie(0);
+    
+   	cin>>n;
+    int cnt = 0;
+    for(int i=1;i<=4500;i++){
+    	int up = 2*n-i*(i-1);
+    	int down = 2*i;
+    	//자연수이면
+    	if(up % down==0 && up/down>0){
+    		cnt++;
+    	}
+    	//음수이면
+    	if(up<0){
+    		break;
+    	}
+    }
+    cout<<cnt; 
+    return 0;
+}
