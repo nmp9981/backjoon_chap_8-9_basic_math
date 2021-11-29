@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <utility>
+#include <set>
+
+using namespace std;//이름공간 선언
+
+int n;
+const int maxi = 1010000;
+vector<int> prime;//소수 목록
+int check_prime[maxi];//소수여부 체크
+
+//입력
+void input(){
+	cin>>n;
+}
+
+//에라토스테네스의 체
+void eratos(){
+    prime.push_back(2);//2도 소수
+    int root_maxi = pow(maxi,0.5);
+    for(int i=3;i<root_maxi;i+=2){
+        if(check_prime[i]==0){//소수라면
+            for(int j=i*i;j<maxi;j+=i){//i^2부터 i의 배수
+                check_prime[j] = 1;//소수가 아님
+            }
+        }
+    }
+    //소수넣기
+    for(int i=3;i<maxi;i+=2){
+        if(check_prime[i]==0){
+            prime.push_back(i);
+        }
+    }
+}
+
+//팰린드롬 구하기
+void palindrome(int x){
+	for(int i=0;i<prime.size();i++){//소수리스트 조사
+	    int num = prime[i];
+	    //각 숫자를 판단하기 위해 문자열로
+	    string s = to_string(num);
+	    int l = s.size();
+	    
+	    bool flag = true;//팰린드롬인가?
+	    for(int j=0;j<l/2;j++){
+	        if(s[j]!=s[l-j-1]){//대칭이 아니면
+	            flag = false;//팰린드롬이 아님
+	            break;
+	        }
+	    }    
+	    //팰린드롬이고 입력수보다 크면
+	    if(flag==true && num>=x){
+	        cout<<num;
+	        return;
+	    }
+	}
+}
+
+int main(){
+    cin.tie(0);
+    cout.tie(0);
+
+    input();//입력
+    eratos();//소수구하기
+    palindrome(n);//n이상인 팰린드롬구하기
+    return 0;
+}
