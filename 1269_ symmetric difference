@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <utility>
+#include <set>
+
+using namespace std;//이름공간 선언
+
+int n,m;
+set<int> add;//합집합의 원소
+
+//입력
+void input(){
+	cin>>n>>m;
+	//집합 A
+	for(int i=1;i<=n;i++){
+	    int a;
+	    cin>>a;
+	    add.insert(a);
+	}
+	//집합 B
+	for(int i=1;i<=m;i++){
+	    int b;
+	    cin>>b;
+	    add.insert(b);
+	}
+}
+
+//대칭차집합의 개수
+int set_diff(){
+    int inter = n+m-add.size();//교집합의 개수
+    int cnt = n+m-2*inter;
+    return cnt;
+}
+
+int main(){
+    //빠른 입출력
+    ios::sync_with_stdio(false);
+
+    input();//입력
+    cout<<set_diff();//대칭차집합
+    return 0;
+}
