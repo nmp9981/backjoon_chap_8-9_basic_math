@@ -1,0 +1,81 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <utility>
+#include <set>
+
+using namespace std;//이름공간 선언
+
+int a,b;
+const int maxi = 9999999;//b는 1000만이면 충분
+vector<int> prime;//소수
+bool chk[maxi];//소수여부
+
+//입력
+void input(){
+	cin>>a>>b;
+}
+
+//에라토스테네스의 체
+void eratos(){
+    memset(chk,true,sizeof(chk));//초기화
+    b = min(maxi,b);//b는 1000만이면 충분
+    int root_maxi = ceil(pow(b,0.5))+1;
+    //에라토스테네스의 체 사용
+    for(int i=3;i<root_maxi;i+=2){
+        if(chk[i]==true){
+            for(int j=i*i;j<=maxi;j+=i){
+                chk[j] = false;//소수가 아님
+            }
+        }
+    }
+    
+    //5이상의 소수
+    for(int i=5;i<=b;i+=2){
+        if(chk[i]==true){//소수라면
+            prime.push_back(i);
+        }
+    }
+}
+
+//팰린드롬
+void palindrome(){
+    //빠른 입출력
+    cin.tie(0);
+    cout.tie(0);
+    
+    for(int i=0;i<prime.size();i++){
+        string s = to_string(prime[i]);
+        //팰린드롬인가?
+        int size_s = s.size()/2;
+        bool flag = true;
+        for(int j=0;j<size_s;j++){
+            if(s[j]!=s[s.size()-j-1]){
+                flag = false;//팰린드롬이 아님
+                break;
+            }
+        }
+        
+        //팰린드롬이고 범위내에 들면 출력
+        if(flag == true && prime[i]>=a && prime[i]<=b){
+            cout<<prime[i]<<"\n";
+        }
+    }
+}
+
+int main(){
+    //빠른 입출력
+    ios::sync_with_stdio(false);
+    
+    input();//입력
+    eratos();//에라토스테네스의 체
+    palindrome();//팰린드롬판단
+    cout<<-1<<"\n";
+    return 0;
+}
