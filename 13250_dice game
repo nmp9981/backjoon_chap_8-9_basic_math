@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+
+using namespace std;//이름공간 선언
+
+int n;
+const int maxi = 1000001;
+double dp[maxi];//n일때의 주사위 굴리는횟수의 기댓값
+
+//주사위 굴리는 개수
+void dice(){
+    cin>>n;//입력
+    //초기값
+    dp[1] = 1.0;//double형
+    dp[2] = 1+dp[1]/6;//한번은 던져야함
+    dp[3] = 1+(dp[1]+dp[2])/6;
+    dp[4] = 1+(dp[1]+dp[2]+dp[3])/6;
+    dp[5] = 1+(dp[1]+dp[2]+dp[3]+dp[4])/6;
+    dp[6] = 1+(dp[1]+dp[2]+dp[3]+dp[4]+dp[5])/6;
+    for(int i=7;i<=n;i++){
+        //각 1~6까지 나오는 확류은 1/6로 동일
+        dp[i] = 1 + (dp[i-1]+dp[i-2]+dp[i-3]+dp[i-4]+dp[i-5]+dp[i-6])/6;
+    }
+    printf("%.9lf",dp[n]);//출력
+}
+int main(){
+    //빠른 입출력
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+
+    dice();//주사위 결과
+    return 0;
+}
