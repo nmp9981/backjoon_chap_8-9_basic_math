@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+using namespace std;
+
+//구조체
+struct point{
+    int x,y;
+};
+
+int n;
+point a,b,c,pa,pb,pc,p;
+
+//입력
+void input(){
+    //삼각형의 좌표
+    cin>>a.x>>a.y;
+    cin>>b.x>>b.y;
+    cin>>c.x>>c.y;
+}
+
+//삼각형의 넓이
+double area(){
+    double s = abs(a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y))/2.0;
+    return s;
+}
+
+//외적값구하기
+int cross(point p,point q){
+    return p.x*q.y-p.y*q.x;
+}
+
+//삼각형 안쪽에 있는가?
+bool is_in(point p){
+    //점p에서의 벡터 구하기
+    pa.x = a.x-p.x;
+    pa.y = a.y-p.y;
+    pb.x = b.x-p.x;
+    pb.y = b.y-p.y;
+    pc.x = c.x-p.x;
+    pc.y = c.y-p.y;
+    //외적의 부호가 모두 같으면 삼각형 내에 있다
+    if(cross(pa,pc)>=0 && cross(pc,pb)>=0 && cross(pb,pa)>=0){
+        return true;
+    }else if(cross(pa,pc)<=0 && cross(pc,pb)<=0 && cross(pb,pa)<=0){
+        return true;
+    }
+    return false;//삼각형내에 없음
+}
+//사과나무의 개수 구하기
+void apple(){
+    //사과나무
+    cin>>n;
+    int cnt = 0;
+    for(int i=0;i<n;i++){
+        cin>>p.x>>p.y;
+        //사과나무가 삼각형 안쪽에 있는가?
+        if(is_in(p)==true){
+            cnt++;
+        }
+    }
+    //삼각형의 넓이
+    double ans = area();
+    printf("%.1f",ans);
+    cout<<"\n";
+    //사과나무 개수
+    cout<<cnt<<"\n";
+}
+
+int main(){
+    input();//입력
+    apple();//사과나무 개수
+    return 0;
+}
