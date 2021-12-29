@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+using namespace std;
+
+int n;
+const int maxi = 10;
+int dp[maxi][maxi];//i자리수는 j가 총 몇개 오는가?
+int digit[10];//j가 총 몇개 있는가?
+
+//입력
+void input(){
+    cin>>n;
+    /*
+    int cn = 0;
+    for(int i=0;i<=99999;i++){
+        string s = to_string(i);
+        for(int j=0;j<s.size();j++){
+            if(s[j]=='0'){
+                cn++;
+            }
+        }
+    }
+    cout<<cn<<"\n";
+    */
+}
+
+//각 자릿수마다 올 수 있는 숫자의 개수
+void page_digit(){
+    //맨위
+    for(int i=0;i<maxi;i++){
+        dp[1][i] = 1;
+    }
+    //2번째줄부터
+    for(int i=2;i<maxi;i++){
+        for(int j=0;j<maxi;j++){
+            //이전 자릿수*10 + 맨 앞자리가 j
+            dp[i][j] = 10*dp[i-1][j] + pow(10,i-1);
+            //0의개수 구하기
+            if(j==0){
+                dp[i][j] = 10*dp[i-1][j];
+                if(i==2){//0~99
+                    dp[i][j] = 10;
+                }else{//중간에 있는 0 더해주기
+                    for(int k=i-2;k>=1;k--){
+                        dp[i][j]+= (9*pow(10,k));
+                    }
+                }
+            }
+        }
+    }
+    /*
+    //결과
+    for(int i=1;i<maxi;i++){
+        for(int j=0;j<maxi;j++){
+            cout<<dp[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    */
+}
+
+//페이지 수 세기
+void page_num(){
+    memset(digit,0,sizeof(digit));//초기화
+    string s = to_string(n);
+    //이전자릿수
+    for(int j=0;j<maxi;j++){
+        digit[j] += dp[s-1][j];
+    }
+    //현재자릿수
+    
+}
+int main(){
+    input();//입력
+    page_digit();//n자리 수에서의 결과
+    page_num();//페이지수 세기
+    return 0;
+}
