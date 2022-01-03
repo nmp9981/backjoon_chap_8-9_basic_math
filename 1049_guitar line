@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <string>
+#include <vector>
+using namespace std;
+
+int n,m;
+const int maxi = 51;
+const int inf = 10000000;
+int package = inf;
+int single = inf;
+
+//입력
+void input(){
+    cin>>n>>m;
+    //패키지 최소 가격, 낱개 최소 가격 구하기
+    for(int i=0;i<m;i++){
+        int a,b;
+        cin>>a>>b;
+        package = min(package,a);
+        single = min(single,b);
+    }
+}
+
+//기타줄 구매
+void guitar(){
+    int pakage_cost,single_cost,only_pack,only_single;
+    //따로 사는 경우
+    pakage_cost = n/6*min(single*6,package);//패키지가격
+    single_cost = n%6*single;//낱개 가격
+    //패키지만
+    only_pack = (n/6+1)*package;
+    //낱개만
+    only_single = n*single;
+    //결과
+    cout<<min({pakage_cost+single_cost,only_single,only_pack});
+}
+
+int main(){
+    input();//입력
+    guitar();//기타줄 구매
+    return 0;
+}
