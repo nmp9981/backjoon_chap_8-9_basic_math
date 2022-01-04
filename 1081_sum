@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
+#include <cmath>
+using namespace std;
+
+long long m,n;
+long long total = 0;//각 자릿수의 합
+long long point = 0;//자릿수 포인터
+
+//x에대한 각 자릿수의 합
+void cal(long long x,long long p){
+    long long sum = 0;
+    while(x>0){
+        sum += (x%10);
+        x/=10;
+    }
+    if(p==0){
+        total+=sum;
+    }else{
+        total+= sum*pow(10,p) + 45*pow(10,p-1)*p;
+    }
+}
+
+//각 숫자가 몇번 나오는가?
+void solve(){
+    //m~n
+    while(m<=n){
+        //B의 일의자리가 9
+        while(n%10!=9 && m<=n){
+            cal(n,point);
+            n--;
+        }
+        //종료조건
+        if(m>n){
+            break;
+        }
+        //A의 일의자리가 0
+        while(m%10!=0 && m<=n){
+            cal(m,point);
+            m++;
+        }
+        //다음숫자
+        n/=10;
+        m/=10;
+        
+        point+=1;
+    }
+}
+int main()
+{
+    cin>>m>>n;//입력
+    solve();//풀이
+    cout<<total;//출력
+    return 0;
+}
