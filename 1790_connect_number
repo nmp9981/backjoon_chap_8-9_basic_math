@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+
+long long n,k,p,q,x,rest,ans;
+long long a[11] = {0,9,};//각 자릿수에서 올 수 있는 최댓값
+
+//각 자릿수에서 올 수 있는 최댓값
+void made_a(){
+    for(int i=2;i<=10;i++){//0~99...9
+        a[i] = a[i-1]+i*9*pow(10,i-1);
+    }
+}
+
+//k번째 숫자 구하기
+void kth_num(int k){
+    //k 자릿수
+    int dig = 0;
+    for(int i=1;i<=10;i++){
+        if(k<=a[i]){
+            dig = i;
+            break;
+        }
+    }
+    //k번째 숫자 구하기
+    q = k-a[dig-1];//몫
+    p = dig;
+    x = dig*pow(10,p-1);
+    rest = q % x;//나머지
+    ans = (q/x+1)*pow(10,p-1);//맨 앞자리수
+    
+    while(p>1){
+        p--;
+        long long y = dig*pow(10,p-1);
+        ans+=(rest/y)*pow(10,p-1);//몫으로 목표 숫자를 구해감
+        rest = rest % y;//나머지 갱신
+    }
+    
+    //답 구하기
+    if(ans>n){//범위초과
+        cout<<-1;
+    }else if(rest==0){
+        cout<<ans%10-1;
+    }else{
+        string s = to_string(ans);
+        cout<<s[rest-1];
+    }
+}
+
+int main()
+{
+    cin>>n>>k;
+    made_a();//각 자릿수에서 올 수 있는 최댓값
+    if(k<=9){//한자리수
+        cout<<k;
+    }else{
+        kth_num(k);//k번째 숫자
+    }
+    return 0;
+}
