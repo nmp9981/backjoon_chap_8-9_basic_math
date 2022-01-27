@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+int k;
+const int maxi = 32;
+int sum[maxi];//누적합
+int n[maxi];//2^n
+vector<int> ans;
+
+//배열 넣기
+void power2(){
+    sum[1] = 2;n[0] = 1;n[1] = 2;
+    for(int i=2;i<maxi;i++){
+        n[i] = pow(2,i);
+        sum[i] = sum[i-1]+n[i];
+    }
+}
+
+//4,7
+void solve(){
+    //몇 자리수인지 구하기
+    int idx = 1;
+    for(int i=1;i<maxi;i++){
+        if(k<=sum[i]){
+            idx = i;
+            k-=sum[i-1];
+            break;
+        }
+    }
+    //k번째 숫자 구하기
+    while(idx>0){
+        if(k<=n[idx-1]){
+            ans.push_back(4);
+        }else{
+            k-=n[idx-1];
+            ans.push_back(7);
+        }
+        idx--;
+    }
+    //출력
+    for(int i=0;i<ans.size();i++){
+        cout<<ans[i];
+    }
+}
+int main(){
+    cin>>k;
+    power2();//배열 넣기
+    solve();//4,7
+    return 0;
+}
