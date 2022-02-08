@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double a,b,ans;
+const int maxi = 19;
+double dp[maxi][maxi];
+int prime[7] = {2,3,5,7,11,13,17};
+
+//입력
+void input(){
+    cin>>a>>b;
+    a/=100;b/=100;//0~1사이
+}
+
+//조합 경우의 수
+void combi(){
+    dp[1][1] = 1;
+    dp[1][0] = 1;
+    for(int n=2;n<maxi;n++){
+        for(int r=0;r<=n;r++){
+            if(r==0 || r==n){
+                dp[n][r] = 1;
+                continue;
+            }
+            dp[n][r] = dp[n-1][r] + dp[n-1][r-1];
+        }
+    }
+}
+
+//축구경기
+void soccer(){
+    //A의 이긴 횟수가 소수일 확률
+    double win_a = 0;double win_b = 0;
+    for(int i:prime){
+        win_a += dp[18][i]*pow(a,i)*pow(1-a,18-i);
+    }
+    //B의 이긴 횟수가 소수일 확률
+    for(int i:prime){
+        win_b += dp[18][i]*pow(b,i)*pow(1-b,18-i);
+    }
+    //A,B가 이길 확률은 서로 독립
+    ans = win_a+win_b-win_a*win_b;
+    printf("%.6f",ans);
+}
+int main(){
+    input();//입력
+    combi();//조합 경우의 수
+    soccer();//축구
+    return 0;
+}
