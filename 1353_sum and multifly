@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double s,p,mid;
+//탐색
+void search(){
+    double n = 2;
+    double prev = 0;
+    while(true){
+        double mid = pow(s/n,n);
+        if(mid>=p){//조건만족
+            cout<<n;
+            return;
+        }else if(mid<prev){//이전것보다 작으면
+            cout<<-1;//존재불가
+            return;
+        }
+        prev = mid;//갱신
+        n+=1;
+    }
+}
+
+int main(){
+    cin>>s>>p;
+    if(s==p){//합과 곱이 같으면
+        cout<<1;//1개
+        return 0;
+    }
+    search();//탐색
+    return 0;
+}
