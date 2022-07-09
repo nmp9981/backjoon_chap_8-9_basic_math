@@ -1,0 +1,56 @@
+#include <iostream>
+#include <array>
+using namespace std;
+typedef long long ll;//자료형 정의
+
+ll n;
+const ll mod = 1000000007;
+const int matrixSize = 2;
+typedef array<array<ll,matrixSize >,matrixSize> Matrix;//자료구조 정의
+
+//행렬의 곱셈
+Matrix operator*(const Matrix& left, const Matrix& right) {
+	Matrix temp{};
+	for (int i = 0; i < matrixSize; i++) {
+		for (int j = 0; j < matrixSize; j++) {
+			for (int k = 0; k < matrixSize; k++) {
+				temp[i][j] += (left[i][k] * right[k][j]) % mod;
+				temp[i][j] %= mod;
+			}
+		}
+	}
+	return temp;
+}
+//행렬의 거듭제곱
+Matrix Pow(const Matrix& mat, ll x) {
+	if (x == 1) return mat;
+	//분할
+	Matrix resMatrix;
+	if (x % 2 == 0) {
+		resMatrix = Pow(mat, x / 2);
+		resMatrix = resMatrix * resMatrix;
+	}
+	else {
+		resMatrix = Pow(mat, x-1) * mat;
+	}
+	return resMatrix;
+}
+
+int main()
+{
+	//빠른 입력
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+
+	cin >> n;//입력
+	//초기 행렬
+	Matrix initMatrix;
+	initMatrix[0] = { 1,1 };
+	initMatrix[1] = { 1,0 };
+	//Fn,Fn+1
+	Matrix leftMatrix = Pow(initMatrix, n);
+	Matrix rightMatrix = Pow(initMatrix, n + 1);
+	ll ans = (leftMatrix[1][0] * rightMatrix[1][0]) % mod;
+	cout << ans;//출력
+	return 0;
+}
